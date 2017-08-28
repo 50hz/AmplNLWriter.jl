@@ -179,15 +179,9 @@ function loadproblem!(outer::AmplNLNonlinearModel, nvar::Integer, ncon::Integer,
 
         # Remove relations and bounds from constraint expressions
         if length(c.args) == 3
-            if VERSION < v"0.5-"
-                expected_head = :comparison
-                expr_index = 1
-                rel_index = 2
-            else
-                expected_head = :call
-                expr_index = 2
-                rel_index = 1
-            end
+            expected_head = :call
+            expr_index = 2
+            rel_index = 1
 
             @assert c.head == expected_head
             # Single relation constraint: expr rel bound
